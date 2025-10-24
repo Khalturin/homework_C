@@ -1,7 +1,6 @@
 #include "stdio.h"
 
 #define EXIT_SUCCESS 0
-#define COUNT_VALUES 3
 
 /*
 Существует ли треугольник
