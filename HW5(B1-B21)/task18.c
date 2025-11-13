@@ -11,15 +11,14 @@ Output format
 */
 
 int main() {
-	int n = 0, fibonachi = 1, last = 0;
+	int n = 0, f = 1, l = 0;
 	scanf("%d", &n);
 	for(int i = 0; i < n; i++){
-		fibonachi += last;
-		printf("%d ", fibonachi);
-		last = fibonachi;
+		printf("%d ", f);
+		int t = f;
+		f += l;
+		l = t;
 	}
-
 	printf("\n");
-
 	return 0;
 }
