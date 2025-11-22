@@ -9,10 +9,20 @@ Output format
     Ответ YES или NO
 */
 
+int sum_digit(int val){
+    int sum = 0;
+    for(; val > 0; val /= 10){
+		int digit = val % 10;
+        sum += digit;
+	}
+    return sum;
+}
+
 int main() {
-    float x;
-	scanf("%f", &x);
-    printf("%.3f\n", cosinus(x / 180.0 * 3.14159265358979323846));
+    int val = 0;
+    scanf("%d", &val);
+	printf("%s\n", sum_digit(val) % 2 == 0 ? "YES" : "NO");
+	
 	return 0;
 }
 
