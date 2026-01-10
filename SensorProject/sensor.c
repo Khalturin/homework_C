@@ -3,11 +3,13 @@
 #include "sensor.h"
 #include "temp_api.h"
 
+uint8_t is_debug = 0;
+
 void AddRecord(sensor_t *info, int number, uint16_t year, uint8_t month, uint8_t day, int8_t t){
     info[number].year = year;
     info[number].month = month;
     info[number].day = day;
-    info[number].t = t;
+    info[number].tempreture = t;
 }
 
 int AddInfo(sensor_t *info){
@@ -35,7 +37,7 @@ void print(sensor_t *info, int number){
             info[i].year,
             info[i].month,
             info[i].day,
-            info[i].t);
+            info[i].tempreture);
     printf("==================================================\n");
 }
 
@@ -50,7 +52,7 @@ void SortByT(sensor_t info[], int n){
     // qsort()
     for(int i = 0; i < n; i++)
         for(int j = i; j < n; j++)
-            if(info[i].t > info[j].t)
+            if(info[i].tempreture > info[j].tempreture)
                 ChangeIJ(info, i, j);
 }
 
@@ -132,16 +134,48 @@ void SortByData2(sensor_t info[], int n){
 //     return 0;
 // }
 
-void init_sensor_arr(sensor_arr * sa){
-    sa->size = 2;
-    sa->sp = 0;
-    sa->data=malloc(2 * sizeof(sensor_t));
+void init_sensor_arr(sensor_arr * sa, size_t init_capacity){
+    sa->data = malloc(init_capacity * sizeof(sensor_t));
+    if (!sa->data) {
+        perror("malloc failed");
+        exit(EXIT_FAILURE);
+    }
+    sa->size = 0;
+    sa->capacity = init_capacity;
 }
 
 void add_to_sensor_arr(sensor_arr * sa, sensor_t s){
-    if(sa->sp == sa->size - 1){
-        sa->size = sa->size * 2;
-        sa->data = realloc(sa->data, sa->size * sizeof(sensor_t));
+    if(sa->size >= sa->capacity){
+        sa->capacity *= 2;
+        sensor_t* new_data = realloc(sa->data, sa->capacity * sizeof(sensor_t));
+        if (!new_data) {
+            perror("realloc failed");
+            exit(EXIT_FAILURE);
+        }
+        sa->data = new_data;
     }
-    sa->data[sa->sp++] = s;
+    sa->data[sa->size] = s;
+    sa->size++;
+}
+
+const char* month_to_str(int month_num){
+    static const char* months[] = {
+        "Wrong month", // индекс 0 — для удобства
+        "Jan",
+        "Feb",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "Aug",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dec"
+    };
+    if (month_num < 1 || month_num > 12) {
+        return months[0]; 
+    }
+    return months[month_num];
 }

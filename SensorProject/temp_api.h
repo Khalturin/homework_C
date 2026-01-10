@@ -12,6 +12,11 @@
 #include "sensor.h"
 
 /*
+ * @brief считывает файл filename в arr
+ */
+int read_file(char *filename, sensor_arr *arr);
+
+/*
  * @brief возвращает среднюю температуру за месяц
  */
 float mid_month_temp(sensor_t *info, int size, uint8_t month);
