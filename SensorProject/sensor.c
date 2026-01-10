@@ -1,6 +1,7 @@
 #include "stdlib.h"
 
-#include "common.h"
+#include "sensor.h"
+#include "temp_api.h"
 
 void AddRecord(sensor_t *info, int number, uint16_t year, uint8_t month, uint8_t day, int8_t t){
     info[number].year = year;
@@ -94,25 +95,53 @@ void SortByData2(sensor_t info[], int n){
                 ChangeIJ(info, i, j);
 }
 
-int main(void){
-    sensor_t info[SIZE];
-    int number = AddInfo(info);
-    printHeader("Start");
-    print(info, number);
-    printHeader("Sort by temperature");
-    SortByT(info, number);
-    print(info, number);
-    printHeader("Sort by date 1");
-    SortByData(info, number);
-    print(info, number);
-    printHeader("Sort by date 2");
-    SortByData2(info, number);
-    print(info, number);
-    printHeader("Quick Sort by date 1");
-    qsort(info, number, sizeof(sensor_t), (int(*) (const void *, const void *))Compare);
-    print(info, number);
-    printHeader("Quick Sort by date 2");
-    qsort(info, number, sizeof(sensor_t), Compare2);
-    print(info, number);
-    return 0;
+// int main(void){
+//     sensor_t info[SIZE];
+//     int number = AddInfo(info);
+//     printHeader("Start");
+//     print(info, number);
+//     printHeader("Sort by temperature");
+//     SortByT(info, number);
+//     print(info, number);
+//     printHeader("Sort by date 1");
+//     SortByData(info, number);
+//     print(info, number);
+//     printHeader("Sort by date 2");
+//     SortByData2(info, number);
+//     print(info, number);
+//     printHeader("Quick Sort by date 1");
+//     qsort(info, number, sizeof(sensor_t), (int(*) (const void *, const void *))Compare);
+//     print(info, number);
+//     printHeader("Quick Sort by date 2");
+//     qsort(info, number, sizeof(sensor_t), Compare2);
+//     print(info, number);
+    
+//     float temp = min_month_temp(info, SIZE, 10);
+//     printf("Min temp in %d: %.1f\n", 10, temp);
+//     temp = max_month_temp(info, SIZE, 10);
+//     printf("Max temp in %d: %.1f\n", 10, temp);
+//     temp = mid_month_temp(info, SIZE, 10);
+//     printf("Mid temp in %d: %.1f\n", 10, temp);
+//     temp = min_year_temp(info, SIZE, 2025);
+//     printf("Min temp in %d: %.1f\n", 2025, temp);
+//     temp = max_year_temp(info, SIZE, 2025);
+//     printf("Max temp in %d: %.1f\n", 2025, temp);
+//     temp = mid_year_temp(info, SIZE, 2025);
+//     printf("Mid temp in %d: %f.1\n", 2025, temp);
+
+//     return 0;
+// }
+
+void init_sensor_arr(sensor_arr * sa){
+    sa->size = 2;
+    sa->sp = 0;
+    sa->data=malloc(2 * sizeof(sensor_t));
+}
+
+void add_to_sensor_arr(sensor_arr * sa, sensor_t s){
+    if(sa->sp == sa->size - 1){
+        sa->size = sa->size * 2;
+        sa->data = realloc(sa->data, sa->size * sizeof(sensor_t));
+    }
+    sa->data[sa->sp++] = s;
 }

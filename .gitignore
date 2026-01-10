@@ -2,3 +2,5 @@
 *.vscode
 homework_C/
 *.o
+SensorProject/Task
+SensorProject/source_data

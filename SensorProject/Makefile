@@ -1,11 +1,18 @@
 # Makefile
+CC = gcc
+
 all: prog
 
-prog: sensor.o 
-	gcc -o prog sensor.O
+objects = sensor.o temp_api.o main.o
 
-sensor.o: sensor.c common.h
-	gcc -c -o sensor.o sensor.c
+prog: $(objects)
+	$(CC) -o prog $(objects)
+
+# %.o: %.c - шаблон для компиляции .c в .o.
+# $@ Имя файла цели правила
+# $< Имя первого пререквизита
+%.o : %.c
+	$(CC) -c $< -o $@
 
 clean: 
 # Для linux
@@ -13,4 +20,4 @@ clean:
 # Для windows
 clean-windows: 
 	-del /Q *.o 2>nul
-	-del /Q prog 2>nul
+	-del /Q prog.exe 2>nul
