@@ -1,7 +1,7 @@
 #include "stdlib.h"
 
 #include "sensor.h"
-#include "temp_api.h"
+#include "temp_function.h"
 
 uint8_t is_debug = 0;
 
@@ -96,43 +96,6 @@ void SortByData2(sensor_t info[], int n){
             if(DateToInt(info + i) <= DateToInt(info + j))
                 ChangeIJ(info, i, j);
 }
-
-// int main(void){
-//     sensor_t info[SIZE];
-//     int number = AddInfo(info);
-//     printHeader("Start");
-//     print(info, number);
-//     printHeader("Sort by temperature");
-//     SortByT(info, number);
-//     print(info, number);
-//     printHeader("Sort by date 1");
-//     SortByData(info, number);
-//     print(info, number);
-//     printHeader("Sort by date 2");
-//     SortByData2(info, number);
-//     print(info, number);
-//     printHeader("Quick Sort by date 1");
-//     qsort(info, number, sizeof(sensor_t), (int(*) (const void *, const void *))Compare);
-//     print(info, number);
-//     printHeader("Quick Sort by date 2");
-//     qsort(info, number, sizeof(sensor_t), Compare2);
-//     print(info, number);
-    
-//     float temp = min_month_temp(info, SIZE, 10);
-//     printf("Min temp in %d: %.1f\n", 10, temp);
-//     temp = max_month_temp(info, SIZE, 10);
-//     printf("Max temp in %d: %.1f\n", 10, temp);
-//     temp = mid_month_temp(info, SIZE, 10);
-//     printf("Mid temp in %d: %.1f\n", 10, temp);
-//     temp = min_year_temp(info, SIZE, 2025);
-//     printf("Min temp in %d: %.1f\n", 2025, temp);
-//     temp = max_year_temp(info, SIZE, 2025);
-//     printf("Max temp in %d: %.1f\n", 2025, temp);
-//     temp = mid_year_temp(info, SIZE, 2025);
-//     printf("Mid temp in %d: %f.1\n", 2025, temp);
-
-//     return 0;
-// }
 
 void init_sensor_arr(sensor_arr * sa, size_t init_capacity){
     sa->data = malloc(init_capacity * sizeof(sensor_t));

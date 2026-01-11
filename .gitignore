@@ -4,3 +4,4 @@ homework_C/
 *.o
 SensorProject/Task
 SensorProject/source_data
+SensorProject/build/*

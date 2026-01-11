@@ -5,7 +5,7 @@ CC = gcc
 TARGET = sensor
 
 # Исходные файлы
-SRCS = main.c sensor.c temp_api.c
+SRCS = main.c sensor.c temp_function.c
 
 # Диреектории
 OBJ_DIR = objects

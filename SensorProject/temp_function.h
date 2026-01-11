@@ -12,7 +12,7 @@
 #include "sensor.h"
 
 /*
- * @brief считывает файл filename в arr
+ * @brief считывает файл %filename в %arr
  */
 int read_file(char *filename, sensor_arr *arr);
 

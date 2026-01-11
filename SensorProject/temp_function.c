@@ -1,4 +1,4 @@
-#include "temp_api.h"
+#include "temp_function.h"
 #include "stdint.h"
 
 #define MAX_TEMP 9999
