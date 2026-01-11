@@ -37,6 +37,7 @@
 • -d выводится отладочная информация (прим. вся таблица). Используется только в качестве первого агрумента командной строки.
 
 ### Примеры использования
-`./build/sensor -d -f source_data/temperature_small.csv` - выведет всё содержимое таблицы, находящейся в файле `temperature_small.csv`
-`./build/sensor -f source_data/temperature_small.csv -m 7` - выведет только данные минимальной, максимальной и среднемесячной температуры из таблицы, находящейся в файле `temperature_small.csv`
-`./build/sensor -f source_data/temperature_small.csv -m 7 -y 2021` - выведет только данные минимальной, максимальной и среднемесячной температуры, а также минимальной, максимальной и среднегодовой за 2021 год из таблицы, находящейся в файле `temperature_small.csv`
+
+- `./build/sensor -d -f source_data/temperature_small.csv` - выведет всё содержимое таблицы, находящейся в файле `temperature_small.csv`
+- `./build/sensor -f source_data/temperature_small.csv -m 7` - выведет только данные минимальной, максимальной и среднемесячной температуры из таблицы, находящейся в файле `temperature_small.csv`
+- `./build/sensor -f source_data/temperature_small.csv -m 7 -y 2021` - выведет только данные минимальной, максимальной и среднемесячной температуры, а также минимальной, максимальной и среднегодовой за 2021 год из таблицы, находящейся в файле `temperature_small.csv`
